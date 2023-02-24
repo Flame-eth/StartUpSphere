@@ -3,9 +3,8 @@ import Card from "./Card";
 import { getTotalProposals } from "../Blockchain/funder";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import { setAllProposals } from "../redux/userSlice";
-type Props = {};
 
-const MyProposal = (props: Props) => {
+const MyProposal = (props) => {
   const { proposalIDs, AllProposals, userAddress } = useAppSelector(
     (state) => state.users
   );
@@ -36,7 +35,7 @@ const MyProposal = (props: Props) => {
 
   useEffect(() => {
     // console.log(proposalIDs.length);
-    let proposalArr: any[] = [];
+    let proposalArr = [];
     for (let index = 0; index < proposalIDs.length; index++) {
       getTotalProposals(index).then((res) => {
         // proposalArr.push(res);
@@ -49,16 +48,16 @@ const MyProposal = (props: Props) => {
 
   const [isProposer, setIsProposer] = useState(false);
 
-  function filterByProposer(array: any[], proposer: string): any[] {
+  function filterByProposer(array, proposer) {
     return array.filter((obj) => obj.proposer === proposer);
   }
 
-  const filteredArrAddr: any[] = filterByProposer(AllProposals, userAddress);
+  const filteredArrAddr = filterByProposer(AllProposals, userAddress);
 
-  const filteredArrName: any[] = filteredArrAddr
+  const filteredArrName = filteredArrAddr
     .map((obj) => obj.name)
     .filter((name, index, names) => names.indexOf(name) === index)
-    .map((name) => filteredArrAddr.find((obj) => obj.name === name))!;
+    .map((name) => filteredArrAddr.find((obj) => obj.name === name));
 
   useEffect(() => {
     if (filteredArrName.length > 0) {
@@ -95,7 +94,7 @@ const MyProposal = (props: Props) => {
             </div>
           </div>
         ) : (
-          <div style={{ display: "flex", justifyContent: "flex-start" }}>
+          <div className="flex items-center justify-center h-[500px]">
             <h1
               style={{ color: "black", fontSize: "20px", fontStyle: "italic" }}>
               You have not created any proposals yet. Create a proposal to start

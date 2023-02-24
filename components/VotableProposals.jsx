@@ -4,9 +4,7 @@ import { getTotalProposals, verifyVoter } from "../Blockchain/funder";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import { setAllProposals } from "../redux/userSlice";
 
-type Props = {};
-
-const VotableProposals = (props: Props) => {
+const VotableProposals = (props) => {
   const popularCampaigns = [
     {
       title: "Wonder Girls 2010 Wonder Girls World Tour San Francisco",
@@ -45,7 +43,7 @@ const VotableProposals = (props: Props) => {
 
   useEffect(() => {
     // console.log(proposalIDs.length);
-    let proposalArr: any[] = [];
+    let proposalArr = [];
     for (let index = 0; index < proposalIDs.length; index++) {
       getTotalProposals(index).then((res) => {
         // proposalArr.push(res);
@@ -56,18 +54,18 @@ const VotableProposals = (props: Props) => {
     }
   }, [dispatch, proposalIDs.length]);
 
-  function filterByApproved(array: any[]): any[] {
+  function filterByApproved(array) {
     return array.filter((obj) => obj.approved === false);
   }
 
-  let filteredArrName: any[] = [];
+  let filteredArrName = [];
 
   if (IsVoter) {
     const filteredArrAppr = filterByApproved(AllProposals);
     filteredArrName = filteredArrAppr
       .map((obj) => obj.name)
       .filter((name, index, names) => names.indexOf(name) === index)
-      .map((name) => filteredArrAppr.find((obj) => obj.name === name))!;
+      .map((name) => filteredArrAppr.find((obj) => obj.name === name));
   }
 
   // console.log(filteredArrName);
@@ -95,7 +93,7 @@ const VotableProposals = (props: Props) => {
             </div>
           </div>
         ) : (
-          <div style={{ display: "flex", justifyContent: "flex-start" }}>
+          <div className="flex items-center justify-center h-[500px]">
             <h1
               style={{ color: "black", fontSize: "20px", fontStyle: "italic" }}>
               Your account is not a registered voter.

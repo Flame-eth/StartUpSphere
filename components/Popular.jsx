@@ -1,15 +1,10 @@
-import { log } from "console";
 import React, { useEffect, useState } from "react";
 import { getTotalProposals } from "../Blockchain/funder";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import { setAllProposals } from "../redux/userSlice";
 import Card from "./Card";
 
-type Props = {
-  // proposals: any[];
-};
-
-const Popular = ({}: Props) => {
+const Popular = ({}) => {
   const { proposalIDs, AllProposals } = useAppSelector((state) => state.users);
   const dispatch = useAppDispatch();
 
@@ -25,7 +20,7 @@ const Popular = ({}: Props) => {
   // };
   useEffect(() => {
     console.log(proposalIDs.length);
-    let proposalArr: any[] = [];
+    let proposalArr = [];
     for (let index = 0; index < proposalIDs.length; index++) {
       getTotalProposals(index).then((res) => {
         // proposalArr.push(res);
@@ -60,9 +55,9 @@ const Popular = ({}: Props) => {
     },
   ];
 
-  const filteredArr: any[] = AllProposals.map((obj) => obj.name)
+  const filteredArr = AllProposals.map((obj) => obj.name)
     .filter((name, index, names) => names.indexOf(name) === index)
-    .map((name) => AllProposals.find((obj) => obj.name === name))!;
+    .map((name) => AllProposals.find((obj) => obj.name === name));
 
   // console.log(filteredArr);
   return (

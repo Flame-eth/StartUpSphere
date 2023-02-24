@@ -1,10 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
-import type { RootState } from "./store";
-import type { Coin, userState } from "../types";
 
 // Define the initial state using that type
-const initialState: userState = {
+const initialState = {
   proposalIDs: [],
   AllProposals: [],
   MyProposals: [],
@@ -17,13 +14,13 @@ export const userSlice = createSlice({
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
-    setProposalIDs: (state, action: PayloadAction<string[]>) => {
+    setProposalIDs: (state, action) => {
       state.proposalIDs = action.payload;
     },
-    setAllProposals: (state, action: PayloadAction<any[]>) => {
+    setAllProposals: (state, action) => {
       state.AllProposals = [...state.AllProposals, action.payload];
     },
-    addProposal: (state, action: PayloadAction<Coin>) => {
+    addProposal: (state, action) => {
       state.AllProposals.push(action.payload);
     },
     setMyProposals: (state, action) => {

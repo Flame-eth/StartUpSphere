@@ -45,7 +45,7 @@ export default function Home() {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps = async () => {
   const getAllProposal = async () => {
     const Proposals = await getAllProposals();
     console.log(Proposals);

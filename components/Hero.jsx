@@ -3,9 +3,7 @@ import Header from "./Header";
 
 import { getAllProposals } from "../Blockchain/funder";
 
-type Props = {};
-
-const Hero = (props: Props) => {
+const Hero = (props) => {
   const stats = [
     { title: "projects funded", value: "234,589" },
     { title: "towards creative work", value: "$6,896,124,456" },

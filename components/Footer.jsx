@@ -1,13 +1,11 @@
 import React from "react";
 import Image from "next/image";
-import Logo from "../public/logo.svg";
+// import Logo from "../public/logo.svg";
 import Link from "next/link";
 import { SocialIcon } from "react-social-icons";
 import ButtonComponent from "./Button";
 
-type Props = {};
-
-const Footer = (props: Props) => {
+const Footer = (props) => {
   return (
     <footer className="bg-blackPrim py-[20px] px-4 md:px-0">
       <div className="flex items-center py-[40px] flex-col lg:flex-row max-w-7xl mx-auto pr-4">

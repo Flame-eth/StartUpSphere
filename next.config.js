@@ -1,10 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
-  images: {
-    domains: ["cryptochanger.to", "content-api.changenow.io"],
-  },
+  pageExtensions: ["jsx", "js", "ts", "tsx"],
 };
 
 module.exports = nextConfig;

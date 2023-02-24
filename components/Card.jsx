@@ -2,13 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Event from "../public/event2.svg";
 
-type Props = {
-  title: string;
-  walletAdd: string;
-  description: string;
-};
-
-const Card = ({ title, walletAdd, description }: Props) => {
+const Card = ({ title, walletAdd, description }) => {
   return (
     <div className="w-full md:w-[343px] overflow-hidden rounded-[18px] flex items-center flex-col shadow-card">
       <div className="flex-1">

@@ -7,16 +7,31 @@ import { ConnectWallet } from "@thirdweb-dev/react";
 import { useAddress } from "@thirdweb-dev/react";
 import { useAppDispatch } from "../redux/hooks";
 import { setUserAddress } from "../redux/userSlice";
+import Web3 from "web3";
+import detectEthereumProvider from "@metamask/detect-provider";
 
-type Props = {};
-
-const Header = (props: Props) => {
+const Header = (props) => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const dispatch = useAppDispatch();
-
   const address = useAddress();
 
+  // const getUser = async () => {
+  //   let provider = await detectEthereumProvider();
+  //   if (provider) {
+  //     // From now on, this should always be true:
+  //     const provider: any = new Web3(provider);
+  //   }
+  // };
+
+  const getUser = async () => {
+    let provider = null;
+    let detectedProvider = await detectEthereumProvider();
+    if (detectedProvider) {
+      provider = new Web3(detectedProvider);
+    }
+    // Now you can safely use `provider` outside the if block.
+  };
   useEffect(() => {
     dispatch(setUserAddress(address));
   }, [dispatch, address]);
@@ -76,13 +91,20 @@ const Header = (props: Props) => {
               <li className="p-2 border border-blackTert rounded-[4px]">
                 <Link href="/contact">Login</Link>
               </li> */}
-              <ConnectWallet
-                accentColor="#00eaa1"
-                colorMode="dark"
-                btnTitle="Connect Wallet"
-              />
+              <div className="flex items-center flex-col gap-1">
+                <ConnectWallet
+                  accentColor="#00eaa1"
+                  colorMode="dark"
+                  btnTitle="Connect Wallet"
+                />
+                <span className="text-[12px] leading-[16px]">
+                  Connect to Celo(Alfajores) testnet
+                </span>
+              </div>
               <li className="p-2 border border-blackText rounded-[4px] flex items-center justify-center">
-                <Link href="" className="w-[122px] inline-block">
+                <Link
+                  href="/create-proposal"
+                  className="w-[122px] inline-block">
                   Create Proposal
                 </Link>
               </li>
