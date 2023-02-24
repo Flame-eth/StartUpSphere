@@ -698,7 +698,7 @@ export const createNewProposal = async (
   }
 };
 
-export const fundNewProposal = async (proposalID, amount, address) => {
+export const fundNewProposal = async (proposalID, amount) => {
   let provider = await detectEthereumProvider();
   if (provider) {
     // From now on, this should always be true:

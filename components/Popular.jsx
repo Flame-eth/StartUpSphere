@@ -3,10 +3,13 @@ import { getTotalProposals } from "../Blockchain/funder";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import { setAllProposals } from "../redux/userSlice";
 import Card from "./Card";
+import Modal from "./Modal";
 
 const Popular = ({}) => {
   const { proposalIDs, AllProposals } = useAppSelector((state) => state.users);
   const dispatch = useAppDispatch();
+  const [showModal, setShowModal] = useState(false);
+  const [index, setIndex] = useState(0);
 
   // const convertProposal = (proposal: any[]) => {
   //   const proposalArray: any[] = [];
@@ -31,29 +34,6 @@ const Popular = ({}) => {
     }
     // dispatch(setAllProposals(proposalArr
   }, []);
-
-  const popularCampaigns = [
-    {
-      title: "Wonder Girls 2010 Wonder Girls World Tour San Francisco",
-      walletAdd: "0x854740248ade985d00C15bCdB5f6Cf0a206F3141",
-      desc: "We’ll get you directly seated and inside for you to enjoy the show.",
-    },
-    {
-      title: "Wonder Girls 2010 Wonder Girls World Tour San Francisco",
-      walletAdd: "0x854740248ade985d00C15bCdB5f6Cf0a206F3141",
-      desc: "We’ll get you directly seated and inside for you to enjoy the show.",
-    },
-    {
-      title: "Wonder Girls 2010 Wonder Girls World Tour San Francisco",
-      walletAdd: "0x854740248ade985d00C15bCdB5f6Cf0a206F3141",
-      desc: "We’ll get you directly seated and inside for you to enjoy the show.",
-    },
-    {
-      title: "Wonder Girls 2010 Wonder Girls World Tour San Francisco",
-      walletAdd: "0x854740248ade985d00C15bCdB5f6Cf0a206F3141",
-      desc: "We’ll get you directly seated and inside for you to enjoy the show.",
-    },
-  ];
 
   const filteredArr = AllProposals.map((obj) => obj.name)
     .filter((name, index, names) => names.indexOf(name) === index)
@@ -81,7 +61,13 @@ const Popular = ({}) => {
               </div>
             ))} */}
             {filteredArr.map((campaign, index) => (
-              <div key={index}>
+              <div
+                key={index}
+                onClick={() => {
+                  setIndex(index);
+                  setShowModal(true);
+                }}
+                className="cursor-pointer w-auto h-auto">
                 <Card
                   title={campaign.name}
                   walletAdd={campaign.proposer}
@@ -89,6 +75,18 @@ const Popular = ({}) => {
                 />
               </div>
             ))}
+
+            {showModal && (
+              <Modal
+                setShowModal={setShowModal}
+                name={filteredArr[index].name}
+                deadline={filteredArr[index].deadline}
+                targetAmount={filteredArr[index].goalAmount}
+                projectCID={filteredArr[index].projectCID}
+                proposer={filteredArr[index].proposer}
+                AmountRaised={filteredArr[index].raisedAmount}
+              />
+            )}
           </div>
         </div>
       </div>
